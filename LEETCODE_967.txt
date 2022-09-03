@@ -1,0 +1,32 @@
+class Solution {
+
+//Used DFS approach
+public:
+   void num_formation(int d1,int k,int n,vector<int>&res,int num)
+    {
+
+       if(k==0){res.push_back(num);return;}
+       if(n==0){num_formation(d1,k-1,n,res,10*num +d1);return;}
+       if(d1+n>9 && d1-n<0)return;
+        if(d1+n<=9)
+        {
+              num_formation(d1+n,k-1,n,res,10*num +(n+d1));
+        }
+        if(d1-n>=0)
+        {
+            num_formation(d1-n,k-1,n,res,10*num + (d1-n));
+        }
+    }
+    vector<int> numsSameConsecDiff(int n, int k) {
+        
+        vector<int>res;
+        for(int i=1;i<=9;i++)
+        {
+            
+                num_formation(i,n-1,k,res,i)  ;
+            
+        }
+        
+        return res;
+    }
+};
