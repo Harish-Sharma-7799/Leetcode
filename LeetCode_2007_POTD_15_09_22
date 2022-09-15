@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<int> findOriginalArray(vector<int>& changed) {
+       sort(changed.begin(),changed.end());
+        int i=0,j=1;vector<int>res;
+        while(i<changed.size()&& j<changed.size())
+        {
+            if(changed[i]<0)i++;
+            else if(i==j)j++;
+            else if(changed[j]==changed[i]*2)
+            {
+                res.push_back(changed[i]);
+                if(changed[i]==0){changed[i]=-1;changed[j]=-1;}
+               else{ changed[i]*= (-1);changed[j]*= (-1);}
+                i++;j++;
+            }
+            else
+            {
+               j++; 
+            }
+        }
+        for(int i:changed)
+            if(i>0)return {};
+        
+        return res;
+        
+    }
+};
