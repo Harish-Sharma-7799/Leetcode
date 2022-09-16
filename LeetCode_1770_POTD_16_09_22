@@ -1,0 +1,26 @@
+class Solution {
+public:
+    
+    int maximumScore(vector<int>& nums, vector<int>& multipliers) {
+        int n=nums.size();int m=multipliers.size();
+        vector<vector<int>>dp(m+2,vector<int>(m+2,0));
+    
+        
+        for(int i=m-1;i>=0;i--)
+        {
+            for(int k=m-1;k>=i;k--)
+            {
+              int j= n-1-(k-i);
+              
+             if(i<=j){
+             int pickleft= nums[i]*multipliers[k] + dp[i+1][k+1];
+             int pickright= nums[j]*multipliers[k]+ dp[i][k+1];
+              dp[i][k]=max(pickleft,pickright);
+             }
+              }
+            }
+        
+        
+        return dp[0][0];
+    }
+};
